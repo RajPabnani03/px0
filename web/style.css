@@ -1663,7 +1663,7 @@ kbd {
 #status.fit-3 .metric-label,
 #status.fit-4 [data-action="wrap"], #status.fit-4 [data-action="help"], #status.fit-4 .sel-chip, #status.fit-4 #sel-stats,
 #status.fit-5 #st-metrics,
-#status.fit-6 #st-lsp { display: none; }
+#status.fit-6 #st-lsp, #status.fit-6 #st-sf { display: none; }
 #footer-actions { display: flex; align-items: center; gap: 3px; }
 .footer-btn {
   display: inline-flex; align-items: center; gap: 4px;
@@ -1729,24 +1729,25 @@ kbd {
 .sel-menu-item:disabled:hover { background: none; color: var(--faint); }
 .sel-menu-item:focus-visible { outline: 1px solid var(--accent); outline-offset: -1px; }
 .sel-menu-item:hover .footer-kbd { color: var(--fg); border-color: var(--accent); }
-#st-lsp {
+#st-lsp, #st-sf {
   display: flex; align-items: center; gap: 5px;
   cursor: pointer; padding: 2px 7px; border-radius: var(--r);
   user-select: none; font: 500 11.5px/1.2 var(--ui); color: var(--dim);
   transition: background .12s, color .12s;
 }
-#st-lsp:hover, #st-lsp:focus-visible {
+#st-lsp:hover, #st-lsp:focus-visible, #st-sf:hover, #st-sf:focus-visible {
   color: var(--fg); background: var(--bg4);
 }
-#st-lsp::before {
+#st-lsp::before, #st-sf::before {
   content: ""; width: 7px; height: 7px; border-radius: 50%;
   background: var(--dim); flex: none; transition: background .15s;
 }
-#st-lsp[data-state="ready"]::before { background: var(--gi); }
+#st-lsp[data-state="ready"]::before, #st-sf[data-state="ready"]::before { background: var(--gi); }
 #st-lsp[data-state="indexing"]::before,
-#st-lsp[data-state="starting"]::before { background: var(--mark-active); animation: pulse 1.1s ease-in-out infinite; }
-#st-lsp[data-state="failed"]::before { background: var(--gd); }
-#st-lsp[data-state="off"]::before { background: var(--dim); }
+#st-lsp[data-state="starting"]::before,
+#st-sf[data-state="starting"]::before { background: var(--mark-active); animation: pulse 1.1s ease-in-out infinite; }
+#st-lsp[data-state="failed"]::before, #st-sf[data-state="failed"]::before { background: var(--gd); }
+#st-lsp[data-state="off"]::before, #st-sf[data-state="off"]::before { background: var(--dim); }
 
 /* ---------- language server setup (calls pane) ---------- */
 .lsp-setup { padding: 10px 12px; display: flex; flex-direction: column; gap: 10px; font-size: 12px; line-height: 1.55; color: var(--dim); }
