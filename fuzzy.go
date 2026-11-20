@@ -12,11 +12,6 @@ import (
 // Re-exported from internal/fuzzy.Result.
 type FuzzyResult = fuzzy.Result
 
-// isBoundary reports whether a byte acts as a word or segment boundary.
-func isBoundary(b byte) bool {
-	return fuzzy.IsBoundary(b)
-}
-
 // fuzzyScore delegates to internal/fuzzy.Score.
 func fuzzyScore(q, origQ string, e *FileEntry, pos []int) (int, []int, bool) {
 	return fuzzy.Score(q, origQ, e.Path, e.lower, e.nameStart, pos)

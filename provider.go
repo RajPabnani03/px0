@@ -92,11 +92,6 @@ var defaultProviders = []GitProvider{
 	&GitHubProvider{},
 }
 
-// RegisterProvider registers a custom or additional GitProvider.
-func RegisterProvider(p GitProvider) {
-	defaultProviders = append(defaultProviders, p)
-}
-
 // DetectPRURL checks if rawURL is a recognized pull request URL for any supported provider.
 // If matched and valid, returns the matching provider, parsed target, and true.
 func DetectPRURL(rawURL string) (GitProvider, PRTarget, bool) {

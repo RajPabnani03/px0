@@ -470,12 +470,6 @@ func gitAheadBehind(root string) (ahead, behind int, hasUpstream bool) {
 	return 0, 0, false
 }
 
-// gitDiff returns the unified diff of relpath against HEAD. relpath is relative
-// to the served root; git resolves it against -C root. Fails quiet -> "".
-func gitDiff(root, relpath string) string {
-	return gitDiffAgainst(root, relpath, "HEAD")
-}
-
 // gitDiffFull returns the whole unified diff for `git diff <refs...>`, capped at
 // max bytes (with a marker line when cut). Untracked files are not part of a git
 // diff; callers that care list them separately (gitUntracked).
