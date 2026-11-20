@@ -4,7 +4,6 @@ import { openFile } from './tabs.js';
 import { flashFind } from './lsp.js';
 
 export const resultsEl = $('#results');
-export let lastResults = null;
 
 let searchAbort = null;
 
@@ -51,7 +50,6 @@ export const runSearch = debounce(async () => {
 }, 160);
 
 export function renderResults(j) {
-  lastResults = j;
   if (!resultsEl) return;
   if (!j.results || !j.results.length) {
     resultsEl.innerHTML = '<div class="hint">No results.</div>';

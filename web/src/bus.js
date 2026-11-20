@@ -28,33 +28,6 @@ export function on(event, handler) {
 }
 
 /**
- * Subscribe to an event exactly once.
- * @param {string} event - The event name
- * @param {Function} handler - Callback to execute once
- * @returns {() => void} Function that unsubscribes the listener
- */
-export function once(event, handler) {
-  const unsub = on(event, (data) => {
-    unsub();
-    handler(data);
-  });
-  return unsub;
-}
-
-/**
- * Unsubscribe a specific handler from an event.
- * @param {string} event - The event name
- * @param {Function} handler - Callback to remove
- */
-export function off(event, handler) {
-  const set = registry.get(event);
-  if (set) {
-    set.delete(handler);
-    if (set.size === 0) registry.delete(event);
-  }
-}
-
-/**
  * Emit an event synchronously to all registered listeners.
  * Errors in individual listeners are isolated and logged to avoid breaking the caller.
  * @param {string} event - The event name
@@ -72,11 +45,4 @@ export function emit(event, data) {
       console.error(`[bus] Error in listener for "${event}":`, err);
     }
   }
-}
-
-/**
- * Clear all event listeners (useful for testing and workspace re-initialization).
- */
-export function clearBus() {
-  registry.clear();
 }

@@ -167,14 +167,6 @@ export function updateGitPanel(payload) {
   updateSeeAllCommits(payload?.commitsUrl, payload?.recentCommits ? payload.recentCommits.length : undefined);
 }
 
-export async function stagePath(path) {
-  try {
-    await apiPostJson('/api/git/stage', { path });
-  } catch (e) {
-    showToast('!', e.message || 'Could not stage');
-  }
-}
-
 async function doStageAll() {
   const btn = $('#git-stage-all');
   const prevText = btn?.textContent || 'Stage All';
@@ -194,15 +186,6 @@ async function doStageAll() {
     showToast('!', e.message || 'Could not stage');
   } finally {
     if (btn) btn.disabled = false;
-  }
-}
-
-export async function unstagePath(path) {
-  try {
-    await apiPostJson('/api/git/unstage', { path });
-    await triggerRefresh();
-  } catch (e) {
-    showToast('!', e.message || 'Could not unstage');
   }
 }
 
