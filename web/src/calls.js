@@ -133,13 +133,6 @@ function draw() {
   el.innerHTML = html;
 }
 
-// Opens the setup panel whatever the server's state, for the palette command.
-export function openLspSetup() {
-  showRightInspector('calls');
-  T = null;
-  renderLspSetup(listEl(), () => showCalls(S.at));
-}
-
 export function initCalls() {
   $('#calls-dir')?.addEventListener('click', e => {
     const b = e.target.closest('[data-dir]');

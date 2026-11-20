@@ -539,15 +539,6 @@ export function drawCrumbs() {
   if (el) el.innerHTML = '';
 }
 
-export function showImage(path) {
-  openFile(path);
-}
-
-export function hideImage() {
-  const b = $('#imgview');
-  if (b) b.hidden = true;
-}
-
 export function initTabs() {
   setSourceJumpHandler(jumpToSourceLine);
   setCommitStepHandler(stepCommitFile);

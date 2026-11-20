@@ -11,8 +11,6 @@ import { emit } from './bus.js';
 const KEY = 'px0.theme';
 const THEME_SELECTOR = /^(?::root|html)?\[data-theme=["']?([\w-]+)["']?\]$/;
 
-export { DEFAULT_THEME, chooseThemePreference };
-
 let themes = null;
 
 export function getStoredTheme() {
