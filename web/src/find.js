@@ -8,7 +8,7 @@ import { updateStatus } from './status.js';
 import { mdview, previewing, findInPreview, showPreviewHit, clearPreviewMarks, previewHitOffsets, scrollPreviewTo } from './markdown.js';
 
 export const findbar = $('#findbar');
-export const findInput = $('#find-input');
+const findInput = $('#find-input');
 const findCase = $('#find-case');
 
 /* Text currently selected inside the editor viewport, reduced to its first
@@ -75,7 +75,7 @@ export const runFind = debounce(async () => {
   if (hits.length) jumpToHit(0); else paint();
 }, 140);
 
-export function drawMinimap(hits, total) {
+function drawMinimap(hits, total) {
   const mm = $('#minimap-hits');
   if (!hits.length || !total) { mm.innerHTML = ''; return; }
   const seen = new Set();
@@ -83,7 +83,7 @@ export function drawMinimap(hits, total) {
     .map(h => '<i style="top:' + ((h.line - 1) / total * 100).toFixed(3) + '%"></i>').join('');
 }
 
-export function jumpToHit(i) {
+function jumpToHit(i) {
   const d = doc_(); if (!d || !S.find || !S.find.hits.length) return;
   const n = S.find.hits.length;
   S.find.active = ((i % n) + n) % n;

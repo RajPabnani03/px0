@@ -15,7 +15,7 @@ export { DEFAULT_THEME, chooseThemePreference };
 
 let themes = null;
 
-export function getStoredTheme() {
+function getStoredTheme() {
   try { return localStorage.getItem(KEY); } catch { return null; }
 }
 

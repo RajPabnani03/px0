@@ -6,7 +6,7 @@ import { updateStatus } from './status.js';
 import { gotoDefinition } from './lsp.js';
 import { pushHistory } from './history.js';
 
-export const WORD = /[A-Za-z0-9_$]/;
+const WORD = /[A-Za-z0-9_$]/;
 
 /* Returns {word, line, col} where col counts UTF-16 units from the start of the
    line, which is both what JS string indexes give us and what the server needs
@@ -62,7 +62,7 @@ export function wordAtPoint(x, y) {
 
 /* Column (UTF-16 units into the line's text) under a point. Clicking the gutter
    gives 0; clicking the empty space right of the text gives the line's end. */
-export function colAtPoint(x, y) {
+function colAtPoint(x, y) {
   let node, off;
   if (document.caretPositionFromPoint) {
     const p = document.caretPositionFromPoint(x, y);

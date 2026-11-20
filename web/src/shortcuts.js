@@ -27,7 +27,7 @@ import { reindexWorkspace } from './panels.js';
 /* Each entry lists alternative combos, written as for keyLabel in state.js so
    they show as ⌘/⌥/⇧ on a Mac and Ctrl/Alt/Shift elsewhere. Browsers keep
    Ctrl+W and Cmd+W for themselves, so Alt+W is the close shortcut shown. */
-export const SHORTCUTS = [
+const SHORTCUTS = [
   [['Mod+,'], 'Open settings'],
   [['Mod+K'], 'Quick search / palette'], [['Mod+P'], 'Go to file'],
   [['Mod+Shift+P'], 'Command palette'], [['Mod+Shift+O'], 'Go to symbol'],
@@ -71,7 +71,7 @@ export function showHelp() {
   });
 }
 
-export const inField = el => el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
+const inField = el => el && (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA');
 
 export function initShortcuts() {
   $('#btn-theme')?.addEventListener('click', cycleTheme);

@@ -3,7 +3,7 @@ import { $, $$, esc, api, debounce } from './state.js';
 import { openFile } from './tabs.js';
 import { flashFind } from './lsp.js';
 
-export const resultsEl = $('#results');
+const resultsEl = $('#results');
 export let lastResults = null;
 
 let searchAbort = null;

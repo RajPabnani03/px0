@@ -10,7 +10,7 @@ import { diffview } from './diff.js';
 import { makeCardKeeper, pointerPos } from './cardkeep.js';
 
 export const hovercard = $('#hovercard');
-export const HOVER_DELAY = 380;   // rest time before the card opens
+const HOVER_DELAY = 380;   // rest time before the card opens
 // How far the pointer may have drifted while the hover request was in flight
 // before the answer is stale enough to drop rather than show somewhere else.
 const HOVER_DRIFT = 220;
@@ -28,7 +28,7 @@ const sameWord = (a, b) => !!a && !!b && a.line === b.line && a.col === b.col &&
    line's nodes. Far too much to spend on every animation frame, so it runs only
    when the modifier is actually held, or once the pointer has come to rest and
    the card is about to open. Everything on the hot path below is arithmetic. */
-export function onMove({ x, y, mod }) {
+function onMove({ x, y, mod }) {
   if (mod) {
     const at = doc_() ? wordAtPoint(x, y) : null;
     if (!sameWord(at, S.link)) {
@@ -150,7 +150,7 @@ export async function showHover(at, x, y) {
 
 /* Anchor below the pointer, flipping above or inward when that would overflow
    the editor. */
-export function placeHover(x, y) {
+function placeHover(x, y) {
   const host = editor.getBoundingClientRect();
   const card = hovercard.getBoundingClientRect();
   let left = x - host.left + 6;

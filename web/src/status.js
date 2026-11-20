@@ -112,7 +112,7 @@ export function setLspState(j) {
   drawLspStatus();
 }
 
-export function drawLspStatus() {
+function drawLspStatus() {
   const el = $('#st-lsp');
   if (!el) return;
   const anyRunning = S.lsp.anyRunning || S.lsp.state === 'ready' || S.lsp.state === 'indexing';
@@ -146,7 +146,7 @@ let lspPollTimer = null;
 let pollActive = false;
 const installingServers = new Set();
 
-export function startLspPoll() {
+function startLspPoll() {
   if (lspPollTimer) return;
   lspPollTimer = setInterval(async () => {
     if (pollActive) return;
@@ -189,7 +189,7 @@ export function startLspPoll() {
   }, 1200);
 }
 
-export function renderLspMenu(data) {
+function renderLspMenu(data) {
   if (!lspMenuEl || !data) return;
   lastLspData = data;
   const servers = data.servers || [];
@@ -281,7 +281,7 @@ export function renderLspMenu(data) {
   }
 }
 
-export function closeLspMenu() {
+function closeLspMenu() {
   if (lspMenuEl) lspMenuEl.hidden = true;
 }
 
@@ -324,7 +324,7 @@ export async function openLspMenu() {
   }
 }
 
-export async function toggleLspMenu() {
+async function toggleLspMenu() {
   if (!lspMenuEl) return;
   if (!lspMenuEl.hidden) {
     closeLspMenu();
@@ -465,7 +465,7 @@ function renderMetricsMenu(m) {
   `;
 }
 
-export function closeMetricsMenu() {
+function closeMetricsMenu() {
   if (metricsMenuEl) metricsMenuEl.hidden = true;
 }
 
@@ -478,7 +478,7 @@ function placeMetricsMenu() {
   metricsMenuEl.style.left = 'auto';
 }
 
-export function toggleMetricsMenu() {
+function toggleMetricsMenu() {
   if (!metricsMenuEl) return;
   if (!metricsMenuEl.hidden) {
     closeMetricsMenu();

@@ -19,7 +19,7 @@
 // one timer per card; and every decision made against where the pointer is
 // now, not where it was.
 
-export const CARD_GRACE = 340; // ms the pointer may spend outside before the card closes
+const CARD_GRACE = 340; // ms the pointer may spend outside before the card closes
 
 let ptr = null;                // live pointer position in client coords, or null when it left the window
 const keepers = new Set();

@@ -100,7 +100,7 @@ export async function findReferences(arg) {
   inspectReferences(at);
 }
 
-export function acceptHits(word, hits, server, noun, refCount, opts = {}) {
+function acceptHits(word, hits, server, noun, refCount, opts = {}) {
   if (hits.length === 1) {
     const h = hits[0];
     openFile(h.path, { line: h.line, view: opts.view, soft: opts.soft });
@@ -112,7 +112,7 @@ export function acceptHits(word, hits, server, noun, refCount, opts = {}) {
   showHits(word, hits, server, noun, refCount);
 }
 
-export function showHits(word, hits, server, noun, refCount) {
+function showHits(word, hits, server, noun, refCount) {
   setStatusNote('');
   const n = hits.length;
   let head = n + ' ' + noun + (n === 1 ? '' : 's') + ' of "' + word + '"';

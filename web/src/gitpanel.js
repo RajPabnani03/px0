@@ -477,7 +477,7 @@ function cleanCommitMessage(text) {
   return t;
 }
 
-export async function fetchRecentCommits() {
+async function fetchRecentCommits() {
   if (!S.meta?.git) return;
   try {
     const res = await api('/api/git/log?limit=5');

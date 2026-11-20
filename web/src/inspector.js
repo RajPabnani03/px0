@@ -9,7 +9,7 @@ import { loadOutline, drawOutline } from './outline.js';
 import { displayPath, cancelSearch } from './search.js';
 import { groupHits, flashFind, canAskServer, lspCall, positionNow } from './lsp.js';
 
-export function firstInspectorTab() {
+function firstInspectorTab() {
   if ($('#tab-threads') && !$('#tab-threads').hidden) return 'threads';
   const first = Array.from($$('.inspector-tab')).find(b => !b.hidden);
   return first?.dataset.itab || 'threads';
@@ -29,7 +29,7 @@ export function hideRightInspector() {
   render();
 }
 
-export function setRightInspectorTab(tab) {
+function setRightInspectorTab(tab) {
   if (tab !== 'search') cancelSearch();
   $$('.inspector-tab').forEach(b => b.classList.toggle('active', b.dataset.itab === tab));
   $('#pane-right-refs')?.classList.toggle('active', tab === 'refs');
@@ -45,7 +45,7 @@ export function setRightInspectorTab(tab) {
   if (tab === 'search') $('#q')?.focus();
 }
 
-export function renderRightResults(word, hits, server, isExact) {
+function renderRightResults(word, hits, server, isExact) {
   const targetEl = $('#right-ref-target');
   const badgeEl = $('#right-ref-badge');
   const listEl = $('#right-refs-list');
