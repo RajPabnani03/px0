@@ -92,7 +92,6 @@ func paint(text string, code string, bold bool, w io.Writer) string {
 func uiDim(t string, w io.Writer) string    { return paint(t, colorDim, false, w) }
 func uiFaint(t string, w io.Writer) string  { return paint(t, colorFaint, false, w) }
 func uiAccent(t string, w io.Writer) string { return paint(t, colorAccent, false, w) }
-func uiInfo(t string, w io.Writer) string   { return paint(t, colorInfo, false, w) }
 func uiStrong(t string, w io.Writer) string {
 	if colorEnabled(w) {
 		return "\033[1m" + t + "\033[0m"
@@ -168,13 +167,6 @@ func uiHint(text string, w io.Writer) {
 	}
 	fmt.Fprintln(w)
 	fmt.Fprintln(w, uiDim(text, w))
-}
-
-func uiCommand(text string, w io.Writer) {
-	if uiQuiet {
-		return
-	}
-	fmt.Fprintf(w, "  %s\n", uiAccent(text, w))
 }
 
 func uiBullet(text string, w io.Writer) {
@@ -282,4 +274,3 @@ func (s *uiSpinner) Fail(msg string) {
 	}
 	uiStatus("err", msg, "", 0, s.w)
 }
-

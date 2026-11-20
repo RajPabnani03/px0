@@ -211,10 +211,6 @@ func resolveAgentSpec(spec, model string) (string, []string, string, error) {
 	return cmd.Name, cmd.Args, cmd.Model, nil
 }
 
-func agentPresetNames() []string {
-	return harness.PresetNames()
-}
-
 // Detect reports every harness known and whether it is installed right
 // now, so a tool installed since startup shows up without a restart.
 // Models are only discovered for the currently selected harness to avoid
@@ -400,19 +396,6 @@ func (m *agentManager) nextJobID() int64 {
 	return m.seq
 }
 
-// anyRunningLocked reports whether any job is still in flight. Callers hold m.mu.
-func (m *agentManager) anyRunningLocked() bool {
-	for _, j := range m.jobs {
-		if j.Running {
-			return true
-		}
-	}
-	return false
-}
-
-// overlapLocked reports whether a running job already touches rel within
-// [l1,l2]. Different paths, or disjoint ranges on the same path, are free to
-// run at the same time. Callers hold m.mu.
 // findOverlappingJobLocked returns the running job that touches rel within [l1, l2],
 // or nil if none overlaps. Callers hold m.mu.
 func (m *agentManager) findOverlappingJobLocked(rel string, l1, l2 int) *agentJob {
@@ -431,13 +414,6 @@ func (m *agentManager) findOverlappingJobLocked(rel string, l1, l2 int) *agentJo
 		}
 	}
 	return nil
-}
-
-// overlapLocked reports whether a running job already touches rel within
-// [l1,l2]. Different paths, or disjoint ranges on the same path, are free to
-// run at the same time. Callers hold m.mu.
-func (m *agentManager) overlapLocked(rel string, l1, l2 int) bool {
-	return m.findOverlappingJobLocked(rel, l1, l2) != nil
 }
 
 // Start dispatches an instruction anchored to abs:l1-l2. It returns as soon as
