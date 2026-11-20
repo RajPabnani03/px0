@@ -19,7 +19,7 @@ export async function loadOutline() {
 
 /* A language server's document symbols beat regex on every axis, so swap them
    in whenever one answers. Panel only: this never moves the viewport. */
-export async function upgradeOutline(d) {
+async function upgradeOutline(d) {
   if (d.outlineLSP || S.lsp.state === 'off' || S.lsp.state === 'failed') return;
   d.outlineLSP = true;
   let j;
@@ -61,7 +61,7 @@ export function drawOutline() {
   if (rel) rel.innerHTML = renderSymHtml(rsyms);
 }
 
-export const KIND_LABEL = {
+const KIND_LABEL = {
   func: 'fn', method: 'fn', fn: 'fn', def: 'fn', defp: 'fn', defmacro: 'mac',
   class: 'cls', struct: 'str', interface: 'int', trait: 'trt', impl: 'impl',
   type: 'typ', typealias: 'typ', enum: 'enm', record: 'rec', object: 'obj',
@@ -71,7 +71,7 @@ export const KIND_LABEL = {
   heading: 'h', sym: '·',
 };
 
-export function kindLabel(k) { return KIND_LABEL[k] || k.slice(0, 3); }
+function kindLabel(k) { return KIND_LABEL[k] || k.slice(0, 3); }
 
 export function initOutline() {
   $('#outline')?.addEventListener('click', e => {

@@ -10,7 +10,7 @@ import { isAutoRevealEnabled } from './settings.js';
 export const treeEl = $('#tree');
 const treeMenu = $('#tree-menu');
 let activeTreeTarget = null;
-export const openDirs = new Set();
+const openDirs = new Set();
 // A newer tree action invalidates responses from older directory requests.
 let expansionVersion = 0;
 
@@ -106,7 +106,7 @@ export function relabelTreeBadges() {
 
 /* A colour family per file kind, drawn in CSS. Emoji or icon fonts would be at
    the mercy of whatever the viewer has installed. */
-export const FILE_KIND = {
+const FILE_KIND = {
   go: 'code', js: 'code', mjs: 'code', cjs: 'code', ts: 'code', tsx: 'code', jsx: 'code',
   py: 'code', rb: 'code', rs: 'code', java: 'code', kt: 'code', c: 'code', h: 'code',
   cc: 'code', cpp: 'code', hpp: 'code', cs: 'code', php: 'code', swift: 'code',
@@ -119,7 +119,7 @@ export const FILE_KIND = {
   png: 'img', jpg: 'img', jpeg: 'img', gif: 'img', webp: 'img', ico: 'img', avif: 'img',
 };
 
-export function fileKind(name) {
+function fileKind(name) {
   const i = name.lastIndexOf('.');
   return (i > 0 && FILE_KIND[name.slice(i + 1).toLowerCase()]) || 'other';
 }
@@ -163,7 +163,7 @@ export function restoreOpenDirs(dirs) {
   }
 }
 
-export function collapseAllDirs() {
+function collapseAllDirs() {
   expansionVersion++;
   openDirs.clear();
 
@@ -179,7 +179,7 @@ export function collapseAllDirs() {
   persistOpenDirs();
 }
 
-export async function expandAllDirs() {
+async function expandAllDirs() {
   if (treeEl.classList.contains('changed-only') || $('#btn-expand-tree')?.classList.contains('busy')) return;
   const version = ++expansionVersion;
   setExpandBusy(true);
@@ -276,7 +276,7 @@ export async function revealFile(path) {
   }
 }
 
-export async function expandDirtyDirs(container = treeEl, version = expansionVersion) {
+async function expandDirtyDirs(container = treeEl, version = expansionVersion) {
   const isCurrent = () => version === expansionVersion && treeEl.classList.contains('changed-only');
   if (!isCurrent()) return;
   const dirtyRows = Array.from(container.querySelectorAll('.tr.dir.dirty:not(.open)'));
@@ -451,7 +451,7 @@ export async function patchTreeGitStatus(statuses = {}, dirtyDirs = {}, staged =
 /* In Git view with a clean working tree the tree renders nothing (every row is
    filtered out), so it stops claiming the sidebar's spare height and says why.
    The Unpushed section below it is then the whole of the view. */
-export function markTreeCleanState() {
+function markTreeCleanState() {
   const hasDirtyRows = !!treeEl?.querySelector('.tr.file.dirty');
   const hasChanges = (S.meta?.gitChanges > 0) || hasDirtyRows;
   treeEl?.classList.toggle('no-changes',
@@ -511,12 +511,12 @@ export async function setSidebarMode(mode) {
   emit('sidebar:mode', { mode: treeEl.classList.contains('changed-only') ? 'git' : 'files' });
 }
 
-export function closeTreeMenu() {
+function closeTreeMenu() {
   activeTreeTarget = null;
   if (treeMenu && !treeMenu.hidden) treeMenu.hidden = true;
 }
 
-export function openTreeMenu(row, x, y) {
+function openTreeMenu(row, x, y) {
   closeTreeMenu();
   closeSelMenu();
 

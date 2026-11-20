@@ -22,12 +22,12 @@ import { getDocRaw } from './markdown.js';
 import { getSelectedRangeInfo } from './selbar.js';
 
 export const overlay = $('#overlay');
-export const palInput = $('#pal');
-export const palList = $('#pal-list');
-export let pal = null;
+const palInput = $('#pal');
+const palList = $('#pal-list');
+let pal = null;
 
 
-export const COMMANDS = [
+const COMMANDS = [
   { name: withKeys('File: Copy Source Code ({Mod+C})'), run: () => {
     const info = getSelectedRangeInfo();
     const d = doc_();
@@ -96,7 +96,7 @@ export const COMMANDS = [
   { name: 'Keyboard Shortcuts', run: showHelp },
 ];
 
-export const PAL_MODES = {
+const PAL_MODES = {
   file: { tag: 'File', hint: 'Type to fuzzy-match any file. Prefix : for a line, @ for a symbol, > for a command.' },
   symbol: { tag: 'Symbol', hint: 'Symbols in the active file.' },
   line: { tag: 'Line', hint: 'Enter a line number.' },
@@ -122,7 +122,7 @@ export function closePalette() {
   pal = null;
 }
 
-export const refreshPalette = debounce(async () => {
+const refreshPalette = debounce(async () => {
   if (!pal) return;
   let raw = palInput.value;
   // theme and openpr have no prefix character: once entered (via a command),
@@ -174,7 +174,7 @@ export const refreshPalette = debounce(async () => {
   drawPalette();
 }, 40);
 
-export function fuzzyHTML(text, pos) {
+function fuzzyHTML(text, pos) {
   if (!pos || !pos.length) return esc(text);
   const set = new Set(pos);
   let out = '', open = false;
@@ -187,7 +187,7 @@ export function fuzzyHTML(text, pos) {
   return out + (open ? '</b>' : '');
 }
 
-export function drawPalette() {
+function drawPalette() {
   if (!pal) return;
   if (!pal.items.length) { palList.innerHTML = '<div class="pi"><span class="pp">No matches</span></div>'; return; }
   palList.innerHTML = pal.items.map((it, i) =>
@@ -200,13 +200,13 @@ export function drawPalette() {
   if (pal.mode === 'theme') setTheme(pal.items[pal.sel].id, false); // live preview
 }
 
-export function movePalette(delta) {
+function movePalette(delta) {
   if (!pal || !pal.items.length) return;
   pal.sel = (pal.sel + delta + pal.items.length) % pal.items.length;
   drawPalette();
 }
 
-export async function acceptPalette() {
+async function acceptPalette() {
   if (!pal || !pal.items.length) return;
   const it = pal.items[pal.sel];
   if (it.kind === 'theme') pal.restoreTheme = null;

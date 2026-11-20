@@ -40,7 +40,7 @@ let upKeeper = null;
 
 
 /* Visible only in "changed files only" mode, and only with something to list. */
-export function syncUnpushedVisibility() {
+function syncUnpushedVisibility() {
   const p = upPanel();
   if (!p) return;
   p.hidden = !(inGitMode() && upList.length > 0);
@@ -140,7 +140,7 @@ function commitKeeper() {
   return upKeeper;
 }
 
-export function hideCommitCard() {
+function hideCommitCard() {
   clearTimeout(upCardTimer);
   upCardTimer = 0;
   upCardSeq++;

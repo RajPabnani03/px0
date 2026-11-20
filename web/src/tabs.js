@@ -371,7 +371,7 @@ export function centerLine(n) {
 // plain source view of the doc already open in the active tab, caret and
 // scroll landing on the given working-tree line -- what a click on a diff
 // line number, or the Source toggle, hands over.
-export function jumpToSourceLine(line) {
+function jumpToSourceLine(line) {
   const d = doc_();
   if (!d || !line) return;
   setDiffMode('source');
@@ -508,7 +508,7 @@ export function switchTab(i) {
 }
 
 let saveSessionTimer = null;
-export function saveWorkspaceState() {
+function saveWorkspaceState() {
   if (saveSessionTimer) clearTimeout(saveSessionTimer);
   saveSessionTimer = setTimeout(async () => {
     try {
@@ -534,7 +534,7 @@ export async function restoreWorkspaceTabs() {
   }
 }
 
-export function drawCrumbs() {
+function drawCrumbs() {
   const el = $('#crumbs');
   if (el) el.innerHTML = '';
 }

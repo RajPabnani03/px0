@@ -562,7 +562,7 @@ function thrOpenStream(id) {
   es.onerror = () => { /* EventSource reconnects on its own and resends a snapshot */ };
 }
 
-export async function openThread(id) {
+async function openThread(id) {
   thr.draft = null;
   thr.cur = null;
   thrCloseStream();
@@ -637,7 +637,7 @@ async function thrSend() {
   }
 }
 
-export async function deleteThread(id) {
+async function deleteThread(id) {
   if (!id) return;
   const t = thr.list.find(x => x.id === id) || (thr.cur?.id === id ? thr.cur : null);
   const title = t?.title ? `"${t.title}"` : 'this thread';

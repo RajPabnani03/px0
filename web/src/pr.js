@@ -140,7 +140,7 @@ function renderBar() {
   if (composeEl) composeEl.hidden = false;
 }
 
-export function nudgeGitHubToken() {
+function nudgeGitHubToken() {
   showToast('!', 'No GitHub token configured: set GITHUB_TOKEN, set GH_TOKEN, or run `gh auth login` -- or connect in Settings.', 5000);
   openSettings('ui', 'GitHub', 'github.token');
 }
@@ -374,7 +374,7 @@ async function revealComposer(entry) {
   if (target) { target.scrollIntoView({ block: 'center', behavior: 'smooth' }); flashDiffRow(target); }
 }
 
-export function openCommentComposer(info) {
+function openCommentComposer(info) {
   if (!meta) return;
   const id = 'prc' + (++seq);
   const box = document.createElement('div');

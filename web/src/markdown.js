@@ -334,7 +334,7 @@ export function previewLine(n) {
 
 /* Source line of the last block starting at or above the top of the preview,
    counting one that mdScrollTo has just placed there. */
-export function previewTopLine() {
+function previewTopLine() {
   const top = mdview.getBoundingClientRect().top + mdGap() + 8;
   let line = 1;
   const blocks = mdArticle.querySelectorAll('[data-line]');
@@ -553,7 +553,7 @@ export function getDocRaw(d) {
   return d.rawTextPromise;
 }
 
-export async function copyFullMarkdown(btn = null) {
+async function copyFullMarkdown(btn = null) {
   const d = doc_();
   if (!d) return;
   const trigger = btn || $('#btn-copy-md');
@@ -745,7 +745,7 @@ function innerDomToMarkdown(node) {
 }
 
 
-export function openLightbox(img) {
+function openLightbox(img) {
   const lb = $('#img-lightbox');
   if (!lb) return;
 

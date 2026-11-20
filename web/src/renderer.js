@@ -200,7 +200,7 @@ export function toPoint({ line, col }) {
 }
 
 /* Decorations are applied to the ~60 live rows only, never to the whole file. */
-export function decorate(first, last) {
+function decorate(first, last) {
   const d = doc_();
   if (S.occ) {
     for (const row of rowsEl.children) markNodes($('.c', row), S.occ, true, 'occ');
@@ -256,7 +256,7 @@ export function markNodes(el, needle, caseSensitive, cls) {
 /* Wrap the half-open character range [from, to) of el in a span. Unlike the
    needle search used for find, this targets one exact occurrence, which is what
    a position-based decoration needs. */
-export function wrapRange(el, from, to, cls) {
+function wrapRange(el, from, to, cls) {
   if (!el || to <= from) return null;
   const walker = document.createTreeWalker(el, NodeFilter.SHOW_TEXT);
   const nodes = [];
@@ -288,7 +288,7 @@ export function rowFor(line) {
   return null;
 }
 
-export function ensureChunks(d, first, last) {
+function ensureChunks(d, first, last) {
   const c0 = Math.floor(first / CHUNK), c1 = Math.floor(Math.max(first, last - 1) / CHUNK);
   for (let c = c0; c <= c1; c++) {
     if (d.chunks.has(c) || d.pending.has(c)) continue;

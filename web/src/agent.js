@@ -309,7 +309,7 @@ function syncBoxVisibility() {
   syncBatchBar();
 }
 
-export function openAgentEdit(info) {
+function openAgentEdit(info) {
   if (!info) return;
   for (const s of sessions.values()) {
     if (rangesOverlap(s.target, info)) {

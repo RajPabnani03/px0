@@ -7,7 +7,7 @@ import { chooseThemePreference, DEFAULT_THEME } from './theme-preference.js';
 import { setLayoutPref } from './diff.js';
 import { setVimModeEnabled, showVimHelp } from './vim.js';
 
-export let settingsModalEl = null;
+let settingsModalEl = null;
 const BUILTIN_SCHEMA = [
   {
     key: "editor.fontSize",
@@ -338,7 +338,7 @@ export function isAutoRevealEnabled() {
   return true;
 }
 
-export async function loadSettings() {
+async function loadSettings() {
   try {
     const data = await api('/api/settings');
     if (data && data.schema && data.schema.length > 0) {
@@ -357,7 +357,7 @@ export async function loadSettings() {
   }
 }
 
-export function applySettingLive(key, val) {
+function applySettingLive(key, val) {
   if (!S.settings) S.settings = {};
   S.settings[key] = val;
 
@@ -450,7 +450,7 @@ export function applySettingLive(key, val) {
   }
 }
 
-export function applyAllSettingsLive() {
+function applyAllSettingsLive() {
   if (!S.settings) return;
   for (const [k, v] of Object.entries(S.settings)) {
     applySettingLive(k, v);

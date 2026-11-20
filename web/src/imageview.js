@@ -8,7 +8,7 @@ let isPanning = false;
 let panStart = { x: 0, y: 0 };
 let panOrigin = { x: 0, y: 0 };
 
-export function isImageViewing(d = doc_()) {
+function isImageViewing(d = doc_()) {
   return !!(d && d.isImage);
 }
 
@@ -26,7 +26,7 @@ export function syncImageView() {
   }
 }
 
-export function renderImageView(d) {
+function renderImageView(d) {
   if (!ivInit) initImageViewer();
   const img = $('#imgview-img');
   const canvas = $('#imgview-canvas');
@@ -69,7 +69,7 @@ export function renderImageView(d) {
   applyImageTransform(d);
 }
 
-export function applyImageTransform(d = doc_()) {
+function applyImageTransform(d = doc_()) {
   if (!d || !d.isImage) return;
   const canvas = $('#imgview-canvas');
   const img = $('#imgview-img');
@@ -122,7 +122,7 @@ export function applyImageTransform(d = doc_()) {
   updateStatus();
 }
 
-export function zoomImage(delta, factor = 1.25) {
+function zoomImage(delta, factor = 1.25) {
   const d = doc_();
   if (!d || !d.isImage) return;
 
@@ -135,7 +135,7 @@ export function zoomImage(delta, factor = 1.25) {
   applyImageTransform(d);
 }
 
-export function fitImage() {
+function fitImage() {
   const d = doc_();
   if (!d || !d.isImage) return;
   d.imageFit = true;
@@ -144,7 +144,7 @@ export function fitImage() {
   applyImageTransform(d);
 }
 
-export function actualSizeImage() {
+function actualSizeImage() {
   const d = doc_();
   if (!d || !d.isImage) return;
   d.imageFit = false;
@@ -154,7 +154,7 @@ export function actualSizeImage() {
   applyImageTransform(d);
 }
 
-export function cycleImageBg() {
+function cycleImageBg() {
   const d = doc_();
   if (!d || !d.isImage) return;
   const modes = ['checker', 'dark', 'light'];
@@ -163,14 +163,14 @@ export function cycleImageBg() {
   applyImageTransform(d);
 }
 
-export function toggleImagePixelated() {
+function toggleImagePixelated() {
   const d = doc_();
   if (!d || !d.isImage) return;
   d.imagePixelated = !d.imagePixelated;
   applyImageTransform(d);
 }
 
-export function panImage(dx, dy) {
+function panImage(dx, dy) {
   const d = doc_();
   if (!d || !d.isImage) return;
   d.imageFit = false;

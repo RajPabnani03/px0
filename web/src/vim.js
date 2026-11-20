@@ -61,7 +61,7 @@ function updateVimCaret() {
   document.body.classList.toggle('vim-normal-caret', vimMode === 'NORMAL');
 }
 
-export function resetVimState() {
+function resetVimState() {
   vimCount = '';
   vimPending = '';
   if (vimPendingTimer) {
@@ -115,7 +115,7 @@ function updateVimStatus() {
   }
 }
 
-export function wordAtCaret() {
+function wordAtCaret() {
   const d = doc_();
   if (!d) return null;
   const row = rowFor(d.cur);
@@ -134,7 +134,7 @@ export function wordAtCaret() {
   return S.at || null;
 }
 
-export function showHoverForCaret() {
+function showHoverForCaret() {
   const at = wordAtCaret();
   if (!at) return;
   const caret = $('#caret');
@@ -597,7 +597,7 @@ export function handleVimKeyDown(e) {
   return false;
 }
 
-export const VIM_SHORTCUT_SECTIONS = [
+const VIM_SHORTCUT_SECTIONS = [
   {
     title: 'Modes & Motions',
     items: [

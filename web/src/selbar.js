@@ -262,7 +262,7 @@ export function hideSelectionBar() {
   fitStatus();
 }
 
-export function updateSelectionBar() {
+function updateSelectionBar() {
   const info = getSelectedRangeInfo();
   if (info) showSelectionBar(info); else hideSelectionBar();
 }
